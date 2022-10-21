@@ -8,6 +8,9 @@ function App() {
     <div className="App">
       <Header />
       <HomePage />
+      <footer>
+        <b> CODE BY MARVELLOUS IBIRONKE</b>
+      </footer>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from './App';
 import store from './redux/configure';
+import DetailsPage from './component/DetailsPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,6 +13,7 @@ root.render(
       <Router>
         <Routes>
           <Route index path="/" element={<App />} />
+          <Route index path="/details:name" element={<DetailsPage />} />
         </Routes>
       </Router>
     </Provider>

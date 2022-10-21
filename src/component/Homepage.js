@@ -5,21 +5,18 @@ import { pullData } from '../redux/details/details';
 import CoinList from './coinList';
 
 const HomePage = () => {
-  const coins = useSelector((state) => state.coins);
+  const coins = useSelector((state) => state.details.details);
   const dispatch = useDispatch();
+
+  const toRender = coins.map((coin) => <CoinList key={coin.rank} item={coin} />);
 
   useEffect(() => {
     dispatch(pullData());
   }, [dispatch]);
   return (
     <>
-      <h1>Details</h1>
-      {coins.map((coin) => (
-        <CoinList
-          key={coin.coinId}
-          name={coin.coinName}
-        />
-      ))}
+      <h1>TOP CURRENCIES</h1>
+      <div className="list">{toRender}</div>
     </>
   );
 };

@@ -1,16 +1,16 @@
 /* eslint-disable */
-import React from "react";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const CoinList = (props) => {
-  const { coinId, coinName, coinRank, coinSymbol } = props;
+  const { item } = props;
 
   return (
-    <div>
-      <div>{coinId}</div>
-      <div>{coinName}</div>
-      <div>{coinRank}</div>
-      <div>{coinSymbol}</div>
-    </div>
+    <NavLink to={`/details:${item.name}`} state={item} className="navlink">
+      <div className="homeCard">
+        <div>{item.name}</div>
+      </div>
+    </NavLink>
   );
 };
 
