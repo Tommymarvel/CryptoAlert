@@ -29,7 +29,7 @@ To get a local copy up and running follow these simple example steps.
 git clone the repository
 
 ```
-git clone https://github.com/Tommymarvel/Math-magicians.git
+git clone https://github.com/Tommymarvel/CryptoMarket.git
 ```
 
 ### Install
