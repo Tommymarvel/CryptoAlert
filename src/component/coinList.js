@@ -6,7 +6,7 @@ const CoinList = (props) => {
   const { item } = props;
 
   return (
-    <NavLink to={`/details:${item.name}`} state={item} className="navlink">
+    <NavLink to={`/details/${item.id}`} state={item} className="navlink">
       <div className="homeCard">
         <div>{item.name}</div>
       </div>

@@ -1,14 +1,15 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+// eslint-disable-next-line
 import axios from 'axios';
 
 const baseUrl = 'https://api.coincap.io/v2/assets';
 
 export const pullData = createAsyncThunk(
   'details/getDetails',
-  async () => {
+  async (id) => {
     try {
-      const response = axios.get(baseUrl);
+      const response = axios(`${baseUrl}/${id}`);
       return response;
     } catch (error) {
       return error;
@@ -16,8 +17,18 @@ export const pullData = createAsyncThunk(
   },
 );
 
+export const showData = createAsyncThunk('details/getData', async () => {
+  try {
+    const response = axios(`${baseUrl}`);
+    return response;
+  } catch (error) {
+    return error;
+  }
+});
+
 const initialState = {
   details: [],
+  data: [],
   loading: 'idle',
 };
 
@@ -31,52 +42,11 @@ export const homeSlice = createSlice({
       state.details = action.payload.data.data;
       state.loading = 'fulfiled';
     });
+    builder.addCase(showData.fulfilled, (state, action) => {
+      state.data = action.payload.data.data;
+      state.loading = 'fulfiled';
+    });
   },
 });
 
 export default homeSlice.reducer;
-
-// const READ = 'READ';
-// // const URL = 'https://api.coincap.io/v2/assets';
-
-// const read = (id) => ({
-//   type: READ,
-//   payload: id,
-// });
-
-// const coinReducer = (state = [], action) => {
-//   switch (action.type) {
-//     case READ:
-//       return action.payload;
-//     default:
-//       return state;
-//   }
-// };
-
-// export const pullData = () => async (dispatch) => {
-//   await fetch('https://api.coincap.io/v2/assets')
-//     .then((res) => res.json())
-//     .then((coins) => {
-//       const coinData = [];
-//       Object.keys(coins).map((key) => {
-//         coinData.push({
-//           coinId: key.id,
-//           coinName: key.name,
-//           coinRank: key.rank,
-//           coinSymbol: key.symbol,
-//           coinSupply: key.supply,
-//           coinMaxSupply: key.maxSupply,
-//           coinMarketCapUsd: key.marketCapUsd,
-//           coinVolumeUsd24Hr: key.volumeUsd24Hr,
-//           coinPriceUsd: key.priceUsd,
-//           coinChangePercent24Hr: key.changePercent24Hr,
-//           coinVwap24Hr: key.vwap24Hr,
-//           coinExplorer: key.explorer,
-//         });
-//         return coinData;
-//       });
-//       dispatch(read(coinData));
-//     });
-// };
-
-// export default coinReducer;

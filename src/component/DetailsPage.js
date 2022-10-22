@@ -1,10 +1,17 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import Header from './Header';
 import './DetailsPage.css';
+import { pullData } from '../redux/details/details';
 
 function DetailsPage() {
-  const { state } = useLocation();
+  const state = useSelector((state) => state.details.details);
+  const dispatch = useDispatch();
+  const { name } = useParams();
+  useEffect(() => {
+    dispatch(pullData(name));
+  }, []);
   return (
     <>
       <Header />
@@ -27,11 +34,11 @@ function DetailsPage() {
             <h3>{state.supply}</h3>
           </div>
           <div className="flex">
-            <h3 className="grid-left">Volume(24) :</h3>
+            <h3 className="grid-left">Volume(24hr) :</h3>
             <h3>{state.volumeUsd24Hr}</h3>
           </div>
           <div className="flex">
-            <h3 className="grid-left">VWAP(24) :</h3>
+            <h3 className="grid-left">VWAP(24hr) :</h3>
             <h3>{state.vwap24Hr}</h3>
           </div>
           <a href={state.explorer} className="a">
@@ -40,7 +47,7 @@ function DetailsPage() {
         </div>
       </div>
       <footer>
-        <b> CODE BY MARVELLOUS IBIRONKE</b>
+        <b> CODE BY MARVELLOUS</b>
       </footer>
     </>
   );
