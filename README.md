@@ -13,7 +13,7 @@
 
 ## Live Demo (if available)
 
-[Live Demo Link](https://cryptomarket-capstone.netlify.app/)
+[Live Demo Link](https://cryptomarketcapstone.netlify.app)
 
 
 ## Getting Started
